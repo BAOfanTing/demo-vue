@@ -1,0 +1,116 @@
+// 1. 导入变量文件
+@import url(var.less);
+
+// --- 全局样式 (Global Styles) ---
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; // 增强：确保边距不撑开容器宽度
+}
+
+a {
+    text-decoration: none;
+    color: inherit; // 增强：继承父级颜色
+    transition: all 0.3s ease; // 增强：增加全局过渡动画
+}
+
+body {
+    overflow-y: auto !important;
+    padding-right: 0 !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f5f7f9; // 增强：给后台一个淡色背景
+}
+
+// --- 后台管理顶部菜单相关样式 (Header Styles) ---
+.header {
+    width: 100%;
+    height: 90px;
+    padding: 0 20px;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    background: @head; // 引用变量
+    display: flex;     // 增强：改用 Flexbox 布局，更现代
+    align-items: center;
+    justify-content: space-between; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); // 增强：增加阴影提升质感
+
+    // 内部 logo 样式
+    .header-logo {
+        // float: left; // 原代码使用了浮动，建议在 Flex 环境下移除
+        display: flex;
+        align-items: center;
+        height: 100%;
+        cursor: pointer;
+
+        img {
+            height: 40px; // 假设有 logo 图片
+            margin-right: 10px;
+        }
+    }
+
+    // 内部标题
+    .header-title {
+        color: @headtitle;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    // 菜单容器
+    .header-menu {
+        position: relative;
+        list-style: none;
+        height: @header--menu-height;
+        display: flex;
+        gap: 20px; // 增强：菜单项之间的间距
+
+        li {
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            cursor: pointer;
+            color: #fff;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1); // 增强：悬浮效果
+            }
+            
+            &.active {
+                border-bottom: 3px solid #fff; // 增强：激活状态标识
+            }
+        }
+    }
+}
+
+// --- 主要内容区域样式 --- 
+.common-layout {
+    padding-top: @header--menu-height; // 为固定定位的 Header 留出空间
+}
+
+// --- 左侧菜单样式 --- 
+.el-aside {
+    width: @pdm--sidebar-width !important;
+    min-height: calc(100vh - @header--menu-height); // 计算侧边栏高度，减去 Header 高度
+}
+
+// --- 新增：响应式适配 --- 
+@media (max-width: 768px) {
+    .header {
+        height: 60px; // 手机端缩减高度
+        padding: 0 10px;
+        
+        .header-title {
+            display: none; // 手机端隐藏文字标题，节省空间
+        }
+    }
+    
+    .common-layout {
+        padding-top: 60px; // 手机端适配
+    }
+    
+    .el-aside {
+        width: 180px !important;
+        min-height: calc(100vh - 60px); // 手机端适配
+    }
+}
