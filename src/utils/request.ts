@@ -1,5 +1,6 @@
 
-import axios, { AxiosRequestConfig, type AxiosResponse } from 'axios';
+import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
+
 import { saveLocalStorage, getLocalStorage, clearLocalStorage } from './utils';
 import Constants from '@/utils/constants';
 import { ElMessage, ElMessageBox } from 'element-plus';
@@ -10,7 +11,7 @@ const TOKEN_NAME = 'token';
 //创建Axios对象
 const request = axios.create(
     {
-        baseURL: import.meta.env.VITE_BASE_URL,
+        baseURL: import.meta.env.VITE_APP_API_URL,
     }
 )
 
